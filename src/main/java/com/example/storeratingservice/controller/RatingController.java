@@ -4,6 +4,7 @@ import com.example.storeratingservice.entity.Rating;
 import com.example.storeratingservice.entity.UserRating;
 import com.example.storeratingservice.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,12 +20,12 @@ public class RatingController {
     @Autowired
     private RatingService ratingService;
 
-    @RequestMapping("/{productId}")
+    @GetMapping("/{productId}")
     public Optional<Rating> getRating(@PathVariable("productId") Long productId) {
         return ratingService.getRating(productId) ;
     }
 
-    @RequestMapping("users/{userId}")
+    @GetMapping("users/{userId}")
     public UserRating getUserRating(@PathVariable("userId") Long userId) {
         List<Rating> ratings = Arrays.asList(
                 new Rating(1L, 4.0),
