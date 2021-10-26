@@ -4,6 +4,7 @@ import com.example.storeratingservice.entity.Rating;
 import com.example.storeratingservice.entity.UserRating;
 import com.example.storeratingservice.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,5 +36,11 @@ public class RatingController {
         UserRating userRating = new UserRating();
         userRating.setUserRating(ratings);
         return  userRating;
+    }
+
+
+    @GetMapping("/product/{productId}")
+    public ResponseEntity<?> getUserByProfileId(@PathVariable("productId") Long productId) {
+        return ResponseEntity.ok(ratingService.getProductById(productId));
     }
 }
