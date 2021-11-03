@@ -4,6 +4,7 @@ import com.example.storeratingservice.entity.Product;
 import com.example.storeratingservice.entity.Rating;
 import com.example.storeratingservice.repository.RatingRepository;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -24,8 +25,12 @@ public class RatingService {
     }
 
     @HystrixCommand(
-            fallbackMethod = "getProductByIdFallback"
-    )
+            fallbackMethod = "getProductByIdFallback",
+            threadPoolKey = "getProductById",
+            threadPoolProperties = {
+                    @HystrixProperty(name="coreSize", value="40"),
+                    @HystrixProperty(name="maxQueueSize", value="20"),
+            })
     public Product getProductById(Long id) {
         return restTemplate.getForObject("http://store-information-service/products/" + id, Product.class);
     }
