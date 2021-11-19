@@ -39,8 +39,9 @@ public class RatingController {
     }
 
 
-    @GetMapping("/product/{productId}")
+    @GetMapping("product/{productId}")
     public ResponseEntity<?> getUserByProfileId(@PathVariable("productId") Long productId) {
+//        return ResponseEntity.ok(productId);
         return ResponseEntity.ok(ratingService.getProductById(productId));
     }
 }
