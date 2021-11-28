@@ -85,8 +85,8 @@ public class StoreRatingServiceApplication {
     }
 
     @Bean
-    public ConsumerFactory<String, Product> consumerFactory() {
-        JsonDeserializer<Product> deserializer = new JsonDeserializer<>(Product.class);
+    public ConsumerFactory<String, String> consumerFactory() {
+        JsonDeserializer<String> deserializer = new JsonDeserializer<>(String.class);
 //		deserializer.setRemoveTypeHeaders(false);
         deserializer.addTrustedPackages("*");
         deserializer.setUseTypeMapperForKey(true);
@@ -96,8 +96,8 @@ public class StoreRatingServiceApplication {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Product> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Product> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
 
