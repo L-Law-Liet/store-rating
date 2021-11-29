@@ -21,6 +21,11 @@ public class RatingController {
     @Autowired
     private RatingService ratingService;
 
+    @GetMapping("")
+    public List<Rating> getRatings() {
+        return ratingService.getRatings() ;
+    }
+
     @GetMapping("/{productId}")
     public Optional<Rating> getRating(@PathVariable("productId") Long productId) {
         return ratingService.getRating(productId) ;
