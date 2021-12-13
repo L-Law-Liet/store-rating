@@ -44,7 +44,7 @@ public class StoreRatingServiceApplication {
     public RestTemplate restTemplate() {
         HttpComponentsClientHttpRequestFactory requestFactory
                 = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(3000);
+//        requestFactory.setConnectTimeout(3000);
 
 
 		CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
