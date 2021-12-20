@@ -7,12 +7,14 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +48,6 @@ public class RatingService {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Basic " + base64Credentials);
         HttpEntity<String> entity = new HttpEntity<>(headers);
-
 //        return restTemplate.getForObject("http://store-information-service/products/" + id, Product.class);
         return restTemplate.exchange("http://store-information-service/products/" + id,
                 HttpMethod.GET, entity, Product.class).getBody();
